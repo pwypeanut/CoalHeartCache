@@ -1,0 +1,1 @@
+{"ts":1411305688162,"silentsave":true,"restoring":false,"patch":[[{"diffs":[[1,"from django.test import TestCase\n\n# Create your tests here.\n"]],"start1":0,"start2":0,"length1":0,"length2":60}]],"length":60}

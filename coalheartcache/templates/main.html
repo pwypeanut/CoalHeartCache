@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/jquery.slick/1.3.9/slick.css"/>
+<link href="/static/css/home.css" rel="stylesheet">
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="http://cdn.jsdelivr.net/jquery.slick/1.3.9/slick.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#carousel").slick({
+            slidesToShow: 2,
+            slidesToScroll: 1
+        });
+    });
+</script>
+{% endblock %}
+
+{% block main %}
+<div class="row">
+    <div class="large-2 column" id="category-select">
+        <ul class="side-nav">
+            {% for cat in categories %}
+                <li><a style="color:white;" href="/people/{{ cat.name.split|join:"_" }}">{{ cat.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="large-10 column" id="gallery">
+        <div class="content">
+            <div class="row" id="nav-header">
+                <h1 class="large-3 columns">{{ category }}</h1>
+            </div>
+            <dl class="sub-nav left">
+                <dt>Sort by:</dt>
+                <dd><a>Newest</a></dd>
+                <dd><a>Recommended</a></dd>
+                <dd><a>Random</a></dd>
+            </dl>
+            <div class="row" id="beneficiaries">
+                <div class="large-12 columns">
+                    <div id="carousel">
+                        {% if not displays %}
+                            <div style="color:white;">No results found.</div>
+                        {% endif %}
+                        {% for display in displays %}
+                        <div>
+                            <div style="background-image: url({{ display.icon.url|slice:"31:" }})" class="beneficiary-thumbnail"></div>
+                            {% if category == "All Charities" %}
+                                <h2>{{ display.full_name }}</h2>
+                            {% else %}
+                                <h2>{{ display.name }}</h2>
+                            {% endif %}
+                            <p>{{ display.description }}</p>
+                            {% if category == "All Categories" %}
+                                <button onclick="location.href='/people/{{ display.name.split|join:"_" }}/';">LEARN MORE</button>
+                            {% elif category == "All Charities" %}
+                                <button onclick="location.href='/charity/{{ display.abbreviation.split|join:"_" }}/';">LEARN MORE</button>
+                            {% else %}
+                                <button onclick="location.href='/story/{{ display.name.split|join:"_" }}/';">LEARN MORE</button>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+body {
+    background: linear-gradient(
+      rgba(0, 0, 0, 0.7), 
+      rgba(0, 0, 0, 0.7)
+    ), url("/static/img/hdb.JPG");
+}
+
+body > .row {
+    height: 90%;
+}
+
+
+.formy, .formy label {
+    color: white;
+    display: block;
+    margin-bottom: 0;
+}
+
+button {
+    margin-bottom: 0;
+    background-color: #e67e22;
+}
+
+button:hover {
+    background-color: #d35400;
+}
+
+#register-box {
+    margin-top: 10%;
+    padding: 20px;
+    border: 1px white solid;
+    width: 50%;
+}
+
+#username, #password {
+    height: 30px;
+}

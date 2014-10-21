@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block styles %}
+    <link href="/static/css/register.css" rel="stylesheet">
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function() {
+       $("#submit").click(function() {
+           var username = $("#username1").val();
+           var name = $("#name1").val();
+           var email = $("#email1").val();
+           var password = $("#pass1").val();
+           var password2 = $("#pass2").val();
+           if ( username == "" || name == "" || email == "" || password == "" || password2 == "" ) return;
+           if ( !username.match(/^[0-9a-z]+$/) ) {
+               $("#username1").css("border", "1px solid red");
+               $("#name1").css("border", "1px solid #cccccc");
+               $("#email1").css("border", "1px solid #cccccc");
+               $("#pass1").css("border", "1px solid #cccccc");
+               $("#pass2").css("border", "1px solid #cccccc");
+               return;
+           }
+           if ( !name.match(/^[0-9a-zA-Z\s]+$/) ) {
+               $("#username1").css("border", "1px solid #cccccc");
+               $("#name1").css("border", "1px solid red");
+               $("#email1").css("border", "1px solid #cccccc");
+               $("#pass1").css("border", "1px solid #cccccc");
+               $("#pass2").css("border", "1px solid #cccccc");
+               return;
+           }
+           if ( !email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/) ) {
+               $("#username1").css("border", "1px solid #cccccc");
+               $("#name1").css("border", "1px solid #cccccc");
+               $("#email1").css("border", "1px solid red");
+               $("#pass1").css("border", "1px solid #cccccc");
+               $("#pass2").css("border", "1px solid #cccccc");
+               return;
+           }
+           if ( password != password2 ) {
+               $("#username1").css("border", "1px solid #cccccc");
+               $("#name1").css("border", "1px solid #cccccc");
+               $("#email1").css("border", "1px solid #cccccc");
+               $("#pass1").css("border", "1px solid red");
+               $("#pass2").css("border", "1px solid red");
+               return;
+           }
+           $.post("/register/", {
+               'csrfmiddlewaretoken': $.cookie("csrftoken"),
+               'username': username,
+               'name': name,
+               'email': email,
+               'password': password,
+           }).done(function(data) {
+              $(".formy").fadeOut("slow", function() {
+                  $(".formy").html(data + "<button onclick=\"location.href='/';\" class='tiny right'>Back</button>");
+                  $(".formy").fadeIn("slow"); 
+              });
+           });
+       });
+    });
+</script>
+{% endblock %}
+
+{% block main %}
+    <div class="row">
+        <div id="register-box" class="large-6 column large-offset-3">
+            <div class="formy">
+                <label>Username
+                    <input type="text" id="username1" placeholder="">
+                </label>
+                <label>Name
+                    <input type="text" id="name1" placeholder="">
+                </label>
+                <label>Email
+                    <input type="text" id="email1" placeholder="">
+                </label>
+                <label>Password
+                    <input type="password" id="pass1" placeholder="">
+                </label>
+                <label>Repeat Password
+                    <input type="password" id="pass2" placeholder="">
+                </label>
+                <button id="submit" class="tiny right">SUBMIT</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}

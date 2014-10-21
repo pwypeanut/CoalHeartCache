@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block scripts %}
+    <script>
+        $(document).ready(function () {
+            $(document).foundation();
+        });
+        $(function() {
+          $('a[href*=#]:not([href=#])').click(function() {
+            if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+              var target = $(this.hash);
+              target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+              if (target.length) {
+                $('html,body').animate({
+                  scrollTop: target.offset().top - 40
+                }, 1000);
+                return false;
+              }
+            }
+          });
+        });
+    </script>
+{% endblock %}
+
+{% block styles %}
+    <link href="/static/fonts/permanentmarker/stylesheet.css" rel="stylesheet"/>
+    <link href="/static/css/front.css" rel="stylesheet">
+    <link href="/static/css/main.css" rel="stylesheet">
+{% endblock %}
+
+{% block main %}
+    <section id="banner">
+        <div class="row">
+            <div id="banner-content" class="large-6 columns right">
+                <h1>I AM AHMAD, AND I SUFFER FROM MALNUTRITION.</h1>
+                <hr>
+                <h4>My community and I are facing food shortages due to the recent drought.</h4>
+                <div id="find-out-more"><a href="#works">HOW CAN YOU HELP ME?</a></div>
+            </div>
+        </div>
+    </section>
+    <section id="intro">
+        <h1>INSPIRE. GIVE. SHARE.</h1>
+        <div class="row">
+            <div class="large-4 columns">
+                <div class="intro-wrapper">
+                    <div class="profile profile1"></div>
+                    <h3>Feng Jiahai</h3><span>Singapore</span>
+                    <p>Hi, I'm Jiahai, and I am so suan that I just won another Gold medal. Help me win more Gold medals!</p>
+                </div>
+            </div>
+            <div class="large-4 columns">
+                <div class="intro-wrapper">
+                    <div class="profile profile2"></div>
+                    <h3>Ranald Lam</h3><span>Singapore</span>
+                    <p>So many people have been asking me to give chance, and I may be running out. Help donate some money to fund my chances!</p>
+                </div>
+            </div>
+            <div class="large-4 columns">
+                <div class="intro-wrapper">
+                    <div class="profile profile3"></div>
+                    <h3>William Gan</h3><span>Singapore</span>
+                    <p>I accidentally ate too much bamboo yesterday. Please donate some bamboo to me to help sustain my livelihood!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="works">
+        <h1>HOW DOES IT WORK?</h1>
+        <div class="row">
+            <div class="large-4 columns">
+                <div class="works-wrapper">
+                    <img src="/static/img/excoal.png"></img>
+                    <h3>COAL</h3>
+                    <p>Support your favourite causes and the people you care for. Provide them with the fuel to sustain their hopes and dreams.</p>
+                </div>
+            </div>
+            <div class="large-4 columns">
+                <div class="works-wrapper">
+                    <img src="/static/img/heart.png"></img>
+                    <h3>HEART</h3>
+                    <p>Get personalised cards and thank-you wishes from your beneficiaries for your generous contribution to their lives.</p>
+                </div>
+            </div>
+            <div class="large-4 columns">
+                <div class="works-wrapper">
+                    <img src="/static/img/cache.png"></img>
+                    <h3>CACHE</h3>
+                    <p>Be informed with updates from your beneficiaries about how their lives were impacted by your contributions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="footer">
+        <div class="row">
+        </div>
+    </section>
+{% endblock %}

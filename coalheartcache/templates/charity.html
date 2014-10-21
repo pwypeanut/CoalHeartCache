@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block styles %}
+<link href="/static/css/main.css" rel="stylesheet">
+<link href="/static/css/charity.css" rel="stylesheet">
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function() {
+        $("#donate").click(function() {
+            var donation_amount = $("#doamt").val();
+            $.post('/story/{{ story.name.split|join:"_" }}/donate/', {
+                'amount': donation_amount,
+                'csrfmiddlewaretoken': $.cookie("csrftoken"),
+            }).done(function() {
+                location.reload(false);
+            });
+        })
+    })
+</script>
+{% endblock %}
+
+{% block main %}
+<div class="row">
+    <div class="large-2 column" id="category-select">
+        <ul class="side-nav">
+            {% for cat in categories %}
+                <li><a style="color:white;" href="/people/{{ cat.name.split|join:"_" }}">{{ cat.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="large-10 column" id="gallery">
+        
+        <div class="row content">
+            <ul class="breadcrumbs">
+                <li><a href="/people/{{ source_category.split|join:"_" }}/">{{ source_category }}</a></li>
+                <li><a href="/charity/{{ source_charity.split|join:"_" }}/">{{ source_charity }}</a></li>
+                <li class="current"><a href="#">{{ story.name }}</a></li>
+            </ul>
+            <div class="large-4 column" id="left-action">
+                <div style="background-image:url('{{ story.icon.url|slice:"31:" }}'); height:300px; width: 100%; background-size: cover" id="thumbnail"></div>
+                <div class="row collapse" id="amount">
+                    <div class="small-3 large-1 columns">
+                        <span class="prefix">$</span>
+                    </div>
+                    <div class="small-6 large-5 columns">
+                        <input id="doamt" type="text" placeholder="1.00" value="{{ current_commitment }}">
+                    </div>
+                    <div class="small-3 large-6 columns">
+                        <span class="postfix">every month</span>
+                    </div>
+                </div>
+                <button id="donate">Donate</button>
+                
+                <div class="progress success">
+                    <span class="meter" style="width:{{ percent }}%;"></span>
+                </div>
+                <p id="target">$<span>{{ current_money }}</span> of $<span>{{ story.monthly_goal }}</span> reached</p>
+            </div>
+            <div class="large-8 column" id="right-info">
+                <h1>{{ story.name }}</h1>
+                <h5>{{ story.charity.full_name }}</h5>
+                <p>{{ story.description }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

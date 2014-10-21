@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block styles %}
+    <link href="/static/css/profile.css" rel="stylesheet">
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $(document).ready(function() {
+           $("#savename").click(function() {
+              var new_name = $("#namefield").val();
+              var new_email = $("#emailfield").val();
+              $.post("/personal/changename/", {
+                  'name': new_name,
+                  'email': new_email,
+                  'csrfmiddlewaretoken': $.cookie("csrftoken"),
+              }).done(function() {
+                  location.reload(false);
+              });
+           });
+           $("#savepassword").click(function() {
+               var old_pass = $("#oldpass").val();
+               var new_pass1 = $("#newpass1").val();
+               var new_pass2 = $("#newpass2").val();
+               if ( old_pass == "" || new_pass1 == "" || new_pass2 == "" ) {
+                   return;
+               }
+               if ( new_pass1 != new_pass2 ) {
+                   $("#oldpass").css("border", "1px solid #cccccc");
+                   $("#newpass1").css("border", "1px solid red");
+                   $("#newpass2").css("border", "1px solid red");
+                   return;
+               }
+               $.post("/personal/changepass/", {
+                   'old_password': old_pass,
+                   'password': new_pass1,
+                   'csrfmiddlewaretoken': $.cookie("csrftoken"),
+               }).done(function(data) {
+                  if ( data == "failed" ) {
+                       $("#oldpass").css("border", "1px solid red");
+                       $("#newpass1").css("border", "1px solid #cccccc");
+                       $("#newpass2").css("border", "1px solid #cccccc");
+                  }
+                  else {
+                      location.reload(false);
+                  }
+               });
+           })
+        });
+    </script>
+{% endblock %}
+
+{% block main %}
+    <div class="row">
+        <div class="large-4 column" id="left-profile">
+            <div id="profile-picture" class="left" style="background-image: url('{{ image_url|slice:"31:" }}')"></div>
+            <h4 class="left">{{ name }}</h4>
+            <form id="profile-info">
+                <label>Name
+                    <input type="text" id="namefield" placeholder="name" value="{{ name }}" />
+                </label>
+                <label>Email
+                    <input type="text" id="emailfield" placeholder="email" value="{{ email }}" />
+                </label>
+                <button class="tiny" id="savename">Save</button>
+            </form>
+            <div>
+                <input id="oldpass" type="password" placeholder="current password"/>
+                <input id="newpass1" type="password" placeholder="new password"/>
+                <input id="newpass2" type="password" placeholder="repeat password" />
+                <button class="tiny" id="savepassword">Change Password</button>
+            </div>
+        </div>
+        <div class="large-8 column" id="right-profile">
+            <div id="donation">
+                <h2>DONATIONS</h2>
+                <hr>
+                <div id="donations">
+                    {% for commit in commitments %}
+                        <div class="donation">
+                            <div class="left">
+                                <h4>{{ commit.name }}</h4>
+                                <p>{{ commit.charity }}</p>
+                            </div>
+                            <div class="right">
+                                <h4>{{ commit.amount }}</h4>
+                                <p class="right">monthly</p>
+                            </div>
+                            
+                        </div>
+                    {% endfor %}
+                    <hr>
+                    <div class="total donation">
+                        <div class="right">
+                            <h4><b>{{ total }}</b></h4>
+                            <p class="right">total</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

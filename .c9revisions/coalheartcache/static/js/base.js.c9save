@@ -1,0 +1,2 @@
+{"ts":1412060371652,"silentsave":true,"restoring":false,"patch":[[]],"length":0}
+{"contributors":[],"silentsave":false,"ts":1412060639936,"patch":[[{"diffs":[[1,"$(document).ready(function() {\n    $(\"#login\").click(function() {\n      var username = $(\"#username\").val();\n      var password = $(\"#password\").val();\n      $.post('/login/', {\n          'username': username,\n          'password': password,\n      }).done(function(data) {\n          \n      });\n    });\n});"]],"start1":0,"start2":0,"length1":0,"length2":305}]],"length":305,"saved":false}

@@ -1,0 +1,69 @@
+<html>
+    <head>
+        <title>
+            CoalHeartCache
+        </title>
+        <link rel="shortcut icon" href="/static/img/favicon.ico">
+        
+        {% block defaults %}
+        <link rel="stylesheet" href="/static/css/normalize.css">
+        <link rel="stylesheet" href="/static/css/foundation.min.css">
+        <link rel="stylesheet" href="/static/css/base.css">
+        <script type="text/javascript" src="/static/js/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="/static/js/fastclick.js"></script>
+        <script type="text/javascript" src="/static/js/jquery.cookie.js"></script>
+        <script type="text/javascript" src="/static/js/modernizr.js"></script>
+        <script type="text/javascript" src="/static/js/placeholder.js"></script>
+        <script type="text/javascript" src="/static/js/foundation.min.js"></script>
+        <script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="/static/js/base.js"></script>
+        {% endblock %}
+        
+        {% block styles %}
+        {% endblock %}
+        
+        {% block scripts %}
+        {% endblock %}
+        
+    </head>
+    <body>
+        <div class="fixed">
+            <nav class="top-bar" data-topbar role="navigation">
+                <ul class="title-area">
+                    <li><img src="/static/img/logo.png" id="logo"></img></li>
+                    <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+                </ul>
+                <section class="top-bar-section">
+                    <ul class="left">
+                        <li class="divider"></li>
+                        {% if not user.is_authenticated %}
+                            <li><a href="/">HOME</a></li>
+                            <li><a href="/#intro">INTRODUCTION</a></li>
+                            <li><a href="/#works">HOW IT WORKS</a></li>
+                            <li><a href="/register/">REGISTER ACCOUNT</a></li>
+                        {% else %}
+                            <li><a href="/">HOME</a></li>
+                            <li><a href="/people/">FIND PEOPLE</a></li>
+                            <li><a href="/charity/">FIND CHARITIES</a></li>
+                            <li><a href="/personal/">YOUR ACCOUNT</a></li>
+                        {% endif %}
+                    </ul>
+                </section>
+                <section class="top-bar-section">
+                    <ul class="right">
+                        {% if user.is_authenticated %}
+                            <li class="left"><button id="logout">LOG OUT</button></li>
+                        {% else %}
+                            <li class="left"><input id="username" type="text" placeholder="USERNAME"></input></li>
+                            <li class="left"><input id="password" type="password" placeholder="PASSWORD"></input></li>
+                            {% csrf_token %}
+                            <li class="left"><button id="login">LOG IN</button></li>
+                        {% endif %}
+                    </ul>
+                </section>
+            </nav>
+        </div>
+        {% block main %}
+        {% endblock %}
+    </body>
+</html>

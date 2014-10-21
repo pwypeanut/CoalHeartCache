@@ -1,0 +1,53 @@
+body > .row {
+    max-width: 100%;
+    margin-top: 45px;
+    padding: 1em;
+}
+
+#left-profile {
+    padding-left: 40px;
+}
+
+#profile-picture {
+    height: 50px;
+    width: 50px;
+    background-size: cover;
+    background-position: 50% 50%;
+    margin-right: 20px;
+}
+
+#profile-info{
+    margin-top: 75px;
+}
+
+#donation hr {
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+.donation-thumbnail {
+    height: 50px;
+    width: 50px;
+    background-size: cover;
+    background-position: 50% 50%;
+    margin-right: 10px;
+}
+
+.donation h4 {
+    margin-bottom: 0;
+}
+
+.donation .right h4, .donation .right h4 b {
+    font-family: Menlo, Monaco, Courier New, monospace;
+}
+
+.donation p {
+    margin-top: -3px;
+    color: grey;
+    font-size: 10px;
+}
+
+.donation {
+    width: 100%;
+    height: 70px;
+}

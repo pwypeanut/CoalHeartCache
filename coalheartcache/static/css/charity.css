@@ -1,0 +1,72 @@
+body {
+    padding-top: 45px;
+}
+
+body > .row {
+    max-width: 100%;
+    height: 100%;
+}
+
+.side-nav > li > a {
+    padding: 5px;
+    font-size: 1rem;
+    color: white;
+    width: 100%;
+    padding-left: 15px;
+}
+
+.side-nav > li > a:hover {
+    background-color: #272727;
+}
+
+#category-select {
+    background-color: #333;
+    height: 100%;
+    padding: 0;
+}
+
+#gallery {
+    
+}
+
+.content {
+    padding: 15px;
+    z-index: 10;
+}
+
+#amount {
+    margin-top: 15px;
+}
+#amount * {
+    margin-bottom: 0;
+}
+
+#left-action button {
+    width: 100%;
+    background-color: rgb(231, 231, 231);
+    color: black;
+    margin-top: 0;
+}
+
+#left-action button:hover {
+    background-color: #e67e22;
+    color: white;
+}
+
+#right-info h1 {
+    margin-bottom: 0;
+}
+
+#target {
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-top: -5px;
+    margin-left: 5px;
+}
+
+#target span {
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: 300;
+    padding: 2px;
+}
+

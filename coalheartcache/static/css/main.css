@@ -1,0 +1,36 @@
+@import url(http://fonts.googleapis.com/css?family=Raleway:300,400,700);
+
+* {
+    font-family: 'Raleway', sans-serif;
+}
+
+#logo {
+    height: 25px;
+    width: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.top-bar ul {
+    background-color: #333;
+}
+
+#username, #password {
+    height: 1.8rem;
+}
+
+h1 {
+    font-size: 1.8em;
+}
+
+h2 {
+    font-size: 1.6em;
+}
+
+#footer .row {
+    height: 80px;
+    background-color: #333;
+    max-width: 100%;
+}
